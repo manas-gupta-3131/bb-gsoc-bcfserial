@@ -473,7 +473,7 @@ static int bcfserial_tty_receive(struct serdev_device *serdev,
 					}
 					else if (bcfserial->rx_address == ADDRESS_CDC) {
 						bcfserial->rx_buffer[bcfserial->rx_offset-2] = 0;
-						printk("> %s", bcfserial->rx_buffer+1);
+						dev_dbg(&bcfserial->serdev->dev, "> %s", bcfserial->rx_buffer+1);
 					}
 				}
 				else {
@@ -648,7 +648,7 @@ fail:
 	dev_err(&bcfserial->serdev->dev, "Closing serial device on failure\n");
 	serdev_device_close(serdev);
 fail_hw:
-	printk(KERN_ERR "Failed to open bcfserial\n");
+	dev_err(&bcfserial->serdev->dev, "Failed to open bcfserial\n");
 	ieee802154_free_hw(hw);
 	return ret;
 }
@@ -674,7 +674,7 @@ static struct serdev_device_driver bcfserial_driver = {
 
 module_serdev_device_driver(bcfserial_driver);
 
-MODULE_DESCRIPTION("WPAN serial driver for BeagleConnect Freedom");
+MODULE_DESCRIPTION("WPAN serial driver for BeagleConnect");
 MODULE_AUTHOR("Erik Larson <erik@statropy.com>");
-MODULE_VERSION("0.1.0");
+MODULE_VERSION("0.1.1");
 MODULE_LICENSE("GPL v2");
