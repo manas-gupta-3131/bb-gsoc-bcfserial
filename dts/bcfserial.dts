@@ -1,0 +1,16 @@
+
+/dts-v1/;
+/plugin/;
+
+/ {
+		fragment@0 {
+				target = <&uart4>;
+				status = "okay";
+				__overlay__ {
+						bcfserial {
+								compatible = "beagle,bcfserial";
+								status = "okay";
+						};
+				};
+		};
+};
